@@ -1,0 +1,7 @@
+/.vscode/
+/[Bb]uild/
+/[Ll]ibrary/
+/[Oo]bj/
+/[Tt]emp/
+*.csproj
+*.sln
