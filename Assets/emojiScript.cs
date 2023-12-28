@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 using Rnd = UnityEngine.Random;
-using NUnit.Framework.Internal.Execution;
 
 public class emojiScript : MonoBehaviour {
 
@@ -18,7 +17,7 @@ public class emojiScript : MonoBehaviour {
     public Sprite[] EmojiSprites;
     public Sprite[] GlassSprites;
     public Sprite EmptySprite;
-    public GameObject Quad;
+    public GameObject Sphere;
     public GameObject Unit;
 
     string[] names = { "ab", "abacus", "abc", "abcd", "accept", "accordion", "adult", "airplane", "alembic", "alien", "ambulance", "amphora", "anchor", "angel", "anger", "angry", "anguished", "ant", "apple", "aquarius", "aries", "art", "artist", "astonished", "astronaut", "atm", "avocado", "axe", "baby", "back", "bacon", "badger", "badminton", "bagel", "balloon", "bamboo", "banana", "bangbang", "banjo", "bank", "barber", "baseball", "basket", "basketball", "bat", "bath", "bathtub", "battery", "bear", "beaver", "bed", "bee", "beer", "beers", "beetle", "beginner", "bell", "bento", "bike", "bikini", "bird", "birthday", "bison", "blossom", "blowfish", "blueberries", "blush", "boar", "bomb", "bone", "book", "bookmark", "books", "boom", "boomerang", "boot", "bouquet", "bowling", "boy", "brain", "bread", "bricks", "briefcase", "briefs", "broccoli", "broom", "bucket", "bug", "bulb", "burrito", "bus", "busstop", "butter", "butterfly", "cactus", "cake", "calendar", "calling", "camel", "camera", "camping", "cancer", "candle", "candy", "capricorn", "carrot", "cat", "cd", "chains", "chair", "chart", "cherries", "chestnut", "chicken", "child", "chipmunk", "chopsticks", "cinema", "cityscape", "cl", "clap", "clapper", "clipboard", "cloud", "clubs", "coat", "cockroach", "cocktail", "coconut", "coffee", "coffin", "coin", "comet", "compass", "compression", "computer", "confounded", "confused", "congratulations", "construction", "cook", "cookie", "cooking", "cool", "corn", "couple", "couplekiss", "cow", "crab", "cricket", "crocodile", "croissant", "crown", "cry", "cucumber", "cupcake", "cupid", "curry", "customs", "cyclone", "dancer", "dango", "dart", "dash", "date", "deer", "desert", "diamonds", "disappointed", "dizzy", "dna", "dodo", "dog", "dollar", "dolls", "dolphin", "door", "doughnut", "dragon", "dress", "droplet", "duck", "dumpling", "dvd", "eagle", "ear", "egg", "eggplant", "eight", "elephant", "elevator", "elf", "end", "envelope", "euro", "exclamation", "expressionless", "eye", "eyeglasses", "eyes", "factory", "fairy", "falafel", "farmer", "fax", "fearful", "feather", "ferry", "firecracker", "firefighter", "fireworks", "fish", "fist", "five", "flags", "flamingo", "flashlight", "flatbread", "flushed", "fly", "fog", "foggy", "fondue", "foot", "football", "footprints", "fountain", "four", "free", "fries", "frog", "frowning", "fuelpump", "garlic", "gear", "gem", "gemini", "genie", "ghost", "gift", "giraffe", "girl", "gloves", "goat", "goggles", "golf", "gorilla", "grapes", "grimacing", "grin", "grinning", "guitar", "gun", "hamburger", "hammer", "hamster", "handbag", "hash", "headphones", "headstone", "heart", "heartbeat", "heartpulse", "hearts", "hedgehog", "helicopter", "herb", "hibiscus", "hippopotamus", "hockey", "hole", "hook", "horse", "hospital", "hotel", "hotsprings", "hourglass", "house", "hushed", "hut", "icecream", "id", "imp", "infinity", "innocent", "interrobang", "japan", "jeans", "jigsaw", "joy", "joystick", "judge", "kangaroo", "key", "keyboard", "kimono", "kiss", "kissing", "kite", "knife", "knot", "koala", "koko", "label", "lacrosse", "ladder", "leaves", "ledger", "leg", "lemon", "leo", "leopard", "libra", "link", "lips", "lipstick", "lizard", "llama", "lobster", "lock", "lollipop", "loop", "loudspeaker", "luggage", "lungs", "mag", "mage", "magnet", "mahjong", "mailbox", "mammoth", "man", "mango", "mask", "mate", "mechanic", "mega", "melon", "mens", "mermaid", "metro", "microbe", "microphone", "microscope", "minibus", "minidisc", "mirror", "moneybag", "monkey", "monorail", "mosquito", "motorboat", "motorcycle", "motorway", "mountain", "mouse", "moyai", "muscle", "mushroom", "mute", "necktie", "new", "newspaper", "ng", "nine", "ninja", "nose", "notebook", "notes", "ocean", "octopus", "oden", "office", "ok", "olive", "on", "one", "onion", "orangutan", "otter", "owl", "ox", "oyster", "package", "pager", "pancakes", "paperclip", "parachute", "parking", "parrot", "peach", "peacock", "pear", "penguin", "pensive", "persevere", "pick", "pie", "pig", "pill", "pilot", "pineapple", "pisces", "pizza", "placard", "plunger", "poodle", "popcorn", "postbox", "potato", "pouch", "pound", "pretzel", "prince", "princess", "printer", "punch", "purse", "pushpin", "question", "rabbit", "raccoon", "racehorse", "radio", "rage", "rainbow", "ram", "ramen", "rat", "razor", "receipt", "recycle", "relaxed", "relieved", "repeat", "restroom", "rewind", "ribbon", "rice", "ring", "rock", "rocket", "rooster", "rose", "rosette", "sa", "sagittarius", "sailboat", "sake", "salt", "sandal", "sandwich", "santa", "sari", "satellite", "sauropod", "saxophone", "scales", "scarf", "school", "scientist", "scissors", "scooter", "scorpion", "scorpius", "scream", "screwdriver", "scroll", "seal", "seat", "secret", "seedling", "selfie", "seven", "shamrock", "shark", "sheep", "shell", "shield", "ship", "shirt", "shorts", "shower", "shrimp", "singer", "six", "skateboard", "ski", "skier", "skunk", "sled", "sleeping", "sleepy", "sloth", "smile", "smiley", "smirk", "smoking", "snail", "snake", "snowboarder", "snowflake", "snowman", "soap", "sob", "soccer", "socks", "softball", "soon", "sos", "sound", "spades", "spaghetti", "sparkle", "sparkler", "sparkles", "speaker", "speedboat", "spider", "sponge", "spoon", "squid", "stadium", "star", "stars", "station", "stethoscope", "stew", "stopwatch", "strawberry", "student", "sunflower", "sunglasses", "sunny", "sunrise", "superhero", "supervillain", "sushi", "swan", "sweat", "symbols", "syringe", "taco", "tada", "tamale", "tangerine", "taurus", "taxi", "tea", "teacher", "teapot", "technologist", "telephone", "telescope", "tennis", "tent", "thermometer", "thread", "three", "ticket", "tiger", "tm", "toilet", "tomato", "tongue", "toolbox", "tooth", "toothbrush", "top", "tophat", "trackball", "tractor", "train", "tram", "trident", "triumph", "trolleybus", "trophy", "truck", "trumpet", "tulip", "turkey", "turtle", "tv", "two", "umbrella", "unamused", "underage", "unlock", "up", "vampire", "vhs", "violin", "virgo", "volcano", "volleyball", "vs", "waffle", "warning", "wastebasket", "watch", "watermelon", "wave", "wc", "weary", "wedding", "whale", "wheelchair", "window", "wink", "wolf", "woman", "womens", "wood", "worm", "worried", "wrench", "yarn", "yen", "yum", "zap", "zebra", "zero", "zombie", "zzz" };
@@ -66,7 +65,7 @@ public class emojiScript : MonoBehaviour {
                     logging += "#";
                 } else { logging += "."; }
             }
-            if (l != lefty - 1) { logging += "\n"; }
+            if (l != lefty - 1) { logging += "|"; }
         }
         Debug.LogFormat("[Emoji #{0}] {1}", moduleId, logging);
 
@@ -167,10 +166,26 @@ public class emojiScript : MonoBehaviour {
             Debug.LogFormat("[Emoji #{0}] Monitor sufficiently destroyed, module solved.", moduleId);
             GetComponent<KMBombModule>().HandlePass();
             Audio.PlaySoundAtTransform("gunshot", transform);
-            Quad.transform.localScale = new Vector3(1000f, 1000f, 0f);
+            Sphere.transform.localScale = new Vector3(1f, 1f, 1f);
             yield return new WaitForSeconds(0.04f);
-            Quad.transform.localScale = new Vector3(0f, 0f, 0f);
-            //TODO: animate the monitor falling off the block
+            Sphere.transform.localScale = new Vector3(0f, 0f, 0f);
+            float ang = -102f;
+            for (int a = 0; a < 60; a++) {
+                switch (a) {
+                    case 0: Unit.transform.localPosition = new Vector3(0f, 0.0356f, 0.0053f); Unit.transform.localRotation = Quaternion.Euler(9.782001f, 0f, 0f); break;
+                    case 1: Unit.transform.localPosition = new Vector3(0f, 0.0416f, 0.0089f); Unit.transform.localRotation = Quaternion.Euler(1.028f, 0f, 0f); break;
+                    case 2: Unit.transform.localPosition = new Vector3(0f, 0.0553f, 0.0066f); Unit.transform.localRotation = Quaternion.Euler(-6.183f, 0f, 0f); break;
+                    case 3: Unit.transform.localPosition = new Vector3(0f, 0.0765f, 0.006234767f); Unit.transform.localRotation = Quaternion.Euler(-15.062f, 0f, 0f); break;
+                    case 4: Unit.transform.localPosition = new Vector3(0f, 0.0992f, 0.0049f); Unit.transform.localRotation = Quaternion.Euler(-32.985f, 0f, 0f); break;
+                    case 5: case 6: Unit.transform.localPosition = new Vector3(0f, 0.1216f, -0.0092f); Unit.transform.localRotation = Quaternion.Euler(-55.049f, 0f, 0f); break;
+                    case 7: case 8: Unit.transform.localPosition = new Vector3(0f, 0.137f, -0.0309f); Unit.transform.localRotation = Quaternion.Euler(-71.26501f, 0f, 0f); break;
+                    case 9: case 10: Unit.transform.localPosition = new Vector3(0f, 0.1461f, -0.0546f); Unit.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f); break;
+                    case 11: case 12: Unit.transform.localPosition = new Vector3(0f, 0.1481001f, -0.08064608f); Unit.transform.localRotation = Quaternion.Euler(-102f, 0f, 0f); break;
+                    case 59: Unit.transform.localScale = new Vector3(0f, 0f, 0f); break;
+                    default: Unit.transform.localPosition -= new Vector3(0f, 0f, 0.03f); ang -= 12f; Unit.transform.localRotation = Quaternion.Euler(ang, 0f, 0f); break;
+                }
+                yield return new WaitForSeconds(0.016f);
+            }
         } else {
             submitted = new int[] { Math.Min(submitted[0], 9), Math.Min(submitted[1], 9)};
             while (submitted[0] + submitted[1] != 0) {
