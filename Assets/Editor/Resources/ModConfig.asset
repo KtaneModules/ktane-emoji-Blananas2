@@ -14,9 +14,8 @@ MonoBehaviour:
   id: emoji
   title: Emoji
   author: Blananas2
-  description: "\u201C:joy:\U0001F602\u201D was the Oxford word of the year in 2015?
-    What the hell?\n\nModule by Blananas2\n\nModule ID: emoji\nThe manual can be found
-    here: https://ktane.timwi.de/HTML/Emoji.html"
+  description: "\"\U0001F602\" was the Oxford word of the year in 2015? What the hell?\r\n\r\nModule
+    by Blananas2\r\n\r\nModule ID: emoji\r\nThe manual can be found here: https://ktane.timwi.de/HTML/Emoji.html"
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 0b0404f4a491a3b4d87e9bcf3420ffab, type: 3}
