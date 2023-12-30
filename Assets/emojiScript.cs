@@ -139,7 +139,9 @@ public class emojiScript : MonoBehaviour {
     }
 
     void Press(KMSelectable Button) {
+        if (moduleSolved) { return; }
         Audio.PlaySoundAtTransform("punch-" + Rnd.Range(0, 13).ToString("D2"), transform);
+        Button.AddInteractionPunch();
         if (Button == Buttons[0]) {
             submitted[0]++;
             SpriteSlots[2].sprite = GlassSprites[Math.Min(submitted[0], 9) - 1];
@@ -165,6 +167,7 @@ public class emojiScript : MonoBehaviour {
         if (submitted[0] == answer / 10 && submitted[1] == answer % 10) {
             Debug.LogFormat("[Emoji #{0}] Monitor sufficiently destroyed, module solved.", moduleId);
             GetComponent<KMBombModule>().HandlePass();
+            moduleSolved = true;
             Audio.PlaySoundAtTransform("gunshot", transform);
             Sphere.transform.localScale = new Vector3(1f, 1f, 1f);
             yield return new WaitForSeconds(0.04f);
