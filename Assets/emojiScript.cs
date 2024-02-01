@@ -207,7 +207,7 @@ public class emojiScript : MonoBehaviour {
         }
     }
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"[!{0} punch X Y] to punch the left emoji X times and the right emoji Y times.";
+    private readonly string TwitchHelpMessage = @"!{0} punch X Y [Punch the left emoji X times and the right emoji Y times.]";
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string command)
@@ -238,9 +238,9 @@ public class emojiScript : MonoBehaviour {
             for (int punchCount = 0; punchCount < punches[index]; punchCount++)
             {
                 Buttons[index].OnInteract();
-                yield return new WaitForSecondsRealtime(.25f);
+                yield return new WaitForSecondsRealtime(.2f);
             }
         }
-        yield return new WaitForSecondsRealtime(.25f);
+        yield return new WaitForSecondsRealtime(.2f);
     }
 }
