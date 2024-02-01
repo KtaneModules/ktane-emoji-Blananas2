@@ -206,5 +206,41 @@ public class emojiScript : MonoBehaviour {
             GeneratePuzzle();
         }
     }
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"[!{0} punch X Y] to punch the left emoji X times and the right emoji Y times.";
+#pragma warning restore 414
 
+    private IEnumerator ProcessTwitchCommand(string command)
+    {
+        command = command.Trim();
+        if (Regex.IsMatch(command, @"^punch\s+\d\s+\d$",RegexOptions.IgnoreCase))
+        {
+            yield return null;
+            int[] punches = command.Split(' ').Where(s=>!string.IsNullOrEmpty(s)).Skip(1).Select(nb => int.Parse(nb)).ToArray();
+            yield return PunchScreen(punches);
+        }
+    }
+
+    private IEnumerator TwitchHandleForcedSolve()
+    {
+        yield return new WaitUntil(() => !started);
+        Debug.LogWarning("Starting autosolver");
+        int tempAns = answer % 100;
+        int[] punches = new int[] { tempAns / 10, tempAns % 10 };
+        yield return PunchScreen(punches);
+        yield return new WaitUntil(() => moduleSolved);
+    }
+
+    private IEnumerator PunchScreen(int[] punches)
+    {
+        for (int index = 0; index < 2; index++) //I love factorization :)
+        {
+            for (int punchCount = 0; punchCount < punches[index]; punchCount++)
+            {
+                Buttons[index].OnInteract();
+                yield return new WaitForSecondsRealtime(.25f);
+            }
+        }
+        yield return new WaitForSecondsRealtime(.25f);
+    }
 }
